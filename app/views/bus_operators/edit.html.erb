@@ -1,0 +1,5 @@
+<h1><%= t('.title', official_name: @bus_operator.official_name) %></h1>
+<%= bootstrap_form_with(model: @bus_operator, local: true) do |f| %>
+  <%= f.text_area :description %>
+  <%= f.submit t('.submit'), class: "btn btn-primary" %>
+<% end %>

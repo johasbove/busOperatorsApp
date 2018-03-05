@@ -1,0 +1,16 @@
+es:
+  bus_operators:
+    edit:
+      title: Editar %{official_name}
+      submit: Guardar
+  reviews:
+    index:
+      comment: Comentario
+      rating: Nota
+  activerecord:
+    attributes:
+      bus_operator:
+        description: Descripción
+      review:
+        comment: Comentario
+        rating: Nota

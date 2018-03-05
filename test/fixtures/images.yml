@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mdpi: MyText
+  hdpi: MyText
+  xhdpi: MyText
+  ios2x: MyText
+  ios3x: MyText
+  external_updated_at: 2018-03-04 20:44:52
+
+two:
+  mdpi: MyText
+  hdpi: MyText
+  xhdpi: MyText
+  ios2x: MyText
+  ios3x: MyText
+  external_updated_at: 2018-03-04 20:44:52
