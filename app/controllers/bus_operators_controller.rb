@@ -3,7 +3,7 @@ class BusOperatorsController < ApplicationController
   before_action :set_bus_operator, only: [:show, :edit, :update]
 
   def index
-    @bus_operators = BusOperator.order(@order_selected)
+    @bus_operators = BusOperator.order(order_params[@order_selected.to_sym])
                                 .page(params[:page])
                                 .per(20)
   end
@@ -38,5 +38,13 @@ class BusOperatorsController < ApplicationController
 
   def set_bus_operator_order
     @order_selected = params[:bus_operator].try(:[], 'order_by') || 'id'
+  end
+
+  def order_params
+    {
+      official_name: :official_name,
+      average_rating: 'average_rating DESC NULLS LAST',
+      id: :id
+    }
   end
 end
