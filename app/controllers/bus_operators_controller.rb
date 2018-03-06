@@ -1,5 +1,5 @@
 class BusOperatorsController < ApplicationController
-  before_action :update_bus_operators, only: :index
+  before_action :update_bus_operators, :set_bus_operator_order, only: :index
   before_action :set_bus_operator, only: [:show, :edit, :update]
 
   def index
@@ -33,10 +33,10 @@ class BusOperatorsController < ApplicationController
   end
 
   def bus_operator_params
-    @order_selected = params.require(:bus_operator).permit(:description)
+    params.require(:bus_operator).permit(:description)
   end
 
-  def bus_operator_order_params
-    params[:bus_operator].try(:[], 'order_by')
+  def set_bus_operator_order
+    @order_selected = params[:bus_operator].try(:[], 'order_by') || 'id'
   end
 end

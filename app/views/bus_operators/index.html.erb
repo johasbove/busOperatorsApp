@@ -27,22 +27,24 @@
               <%= operator.official_name %>
             </td>
             <td>
-              <div class="star-rating" title="<%= operator.rating_percentage %>%">
-                <div class="back-stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <div class="front-stars" style="width: <%= operator.rating_percentage %>%">
+              <% if operator.average_rating.present? %>
+                <div class="star-rating" title="<%= operator.rating_percentage %>%">
+                  <div class="back-stars">
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
+                    <div class="front-stars" style="width: <%= operator.rating_percentage %>%">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
             </td>
             <td>
               <%= link_to(edit_bus_operator_path(operator)) do %>
