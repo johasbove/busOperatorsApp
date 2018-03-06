@@ -1,24 +1,37 @@
-
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= t('.rating') %></th>
-      <th><%= t('.comment') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td>
-          <%= review.rating %>
-        </td>
-        <td>
-          <%= review.comment %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @reviews, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-small pagination-centered' %>
+<div class="container">
+  <div class="row">
+    <h1>
+      <%= t('.title', official_name: @bus_operator.official_name.titleize) %>
+      <small>
+        <%= link_to(@bus_operator) do %>
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="<%= t('.show', official_name: @bus_operator.official_name.titleize) %>"></span>
+        <% end %>
+      </small>
+    </h1>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= t('.rating') %></th>
+          <th><%= t('.comment') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reviews.each do |review| %>
+          <tr>
+            <td>
+              <%= review.rating %>
+            </td>
+            <td>
+              <%= review.comment %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <%= paginate @reviews, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-small pagination-centered' %>
+  </div>
+</div>

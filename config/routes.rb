@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   end
 
   resources :bus_operators, concerns: :paginatable do
-    resources :reviews, shallow: true, only: :index, concerns: :paginatable
+    resources :reviews, only: :index, concerns: :paginatable
   end
+
+  resources :reviews, only: :create
 
   root to: 'bus_operators#index'
 end

@@ -3,14 +3,30 @@ es:
     edit:
       title: Editar %{official_name}
       submit: Guardar
+      show: Ver %{official_name}
+    show:
+      title: "%{official_name}"
+      edit: Editar
+      reviews: Ver calificaciones
+    review_form:
+      submit: Guardar
+    index:
+      title: Listado de Operadores de Buses
+      submit: Ordenar
+      edit: Editar
+      show: Ver %{official_name}
   reviews:
     index:
+      title: Calificaciones de %{official_name}
       comment: Comentario
-      rating: Nota
+      rating: Calificación
+      show: Ver %{official_name}
   activerecord:
     attributes:
       bus_operator:
         description: Descripción
+        average_rating: Calificación
+        official_name: Nombre
       review:
         comment: Comentario
-        rating: Nota
+        rating: Calificación

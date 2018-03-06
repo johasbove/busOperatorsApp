@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <h1>
+      <%= t('.title', official_name: @bus_operator.official_name.titleize) %>
+      <small>
+        <%= link_to(edit_bus_operator_path(@bus_operator)) do %>
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="<%= t('.edit') %>"></span>
+        <% end %>
+        <%= link_to(bus_operator_reviews_path(@bus_operator)) do %>
+          <span class="glyphicon glyphicon-star" aria-hidden="true" title="<%= t('.reviews') %>"></span>
+        <% end %>
+      </small>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <label><%= BusOperator.human_attribute_name :average_rating %></label>
+      <p><%= @bus_operator.average_rating %></p>
+      <label><%= BusOperator.human_attribute_name :description %></label>
+      <p><%= @bus_operator.description %></p>
+
+      <%= render partial: 'review_form', locals:
+        { review: @review, bus_operator: @bus_operator }
+      %>
+    </div>
+    <div class="col-md-4">
+      <%= image_tag(@bus_operator.payload['images']['hdpi']) %>
+    </div>
+  </div>
+  </div>
+</div>

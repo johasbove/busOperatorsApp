@@ -1,31 +1,65 @@
+<div class="container">
+  <div class="row">
+    <h1><%= t('.title') %></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4 form-group">
+      <%= bootstrap_form_with(url: bus_operators_url, method: 'get', local: true, class: 'form-inline pull-right') do |f| %>
+        <%= select('bus_operator', 'order_by', BusOperator::ORDER_ATTR.collect {|attr| [BusOperator.human_attribute_name(attr), attr] }, { include_blank: true, selected: @order_selected }, { class: 'form-control' }) %>
+        <%= f.submit t('.submit'), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped bus-operator-table">
+        <thead>
+        </thead>
+        <tbody>
+          <% @bus_operators.each do |operator| %>
+          <tr>
+            <td>
+              <%= image_tag(operator.payload['icons']['thumb']) %>
+            </td>
+            <td>
+              <%= operator.official_name %>
+            </td>
+            <td>
+              <div class="star-rating" title="<%= operator.rating_percentage %>%">
+                <div class="back-stars">
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <div class="front-stars" style="width: <%= operator.rating_percentage %>%">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <%= link_to(edit_bus_operator_path(operator)) do %>
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true" title="<%= t('.edit') %>"></span>
+              <% end %>
 
-
-<table class="table table-striped">
-  <thead>
-  </thead>
-  <tbody>
-    <% @bus_operators.each do |operator| %>
-      <tr>
-        <td>
-          <%= image_tag(operator.payload['icons']['thumb']) %>
-        </td>
-        <td>
-          <%= operator.official_name %>
-        </td>
-        <td>
-          <%= operator.average_rating %>
-        </td>
-        <td>
-          <%= link_to(edit_bus_operator_path(operator)) do %>
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+              <%= link_to(operator) do %>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="<%= t('.show', official_name: operator.official_name.titleize) %>"></span>
+              <% end %>
+            </td>
+          </tr>
           <% end %>
-          <%= link_to(operator) do %>
-            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= paginate @bus_operators, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-small pagination-centered' %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <%= paginate @bus_operators, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-small pagination-centered' %>
+  </div>
+</div>

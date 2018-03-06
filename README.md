@@ -26,6 +26,3 @@ Things you may want to cover:
 
 Supuestos:
 1. El campo id del JSON de respuesta es único
-
-Nota:
-En los modelos images y icons se agregó un campo 'extrenal_updated_at' para que posteriormente se pueda comprobar si los operadores de bus existentes tienen cambios en estos campos.

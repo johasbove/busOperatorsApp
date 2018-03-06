@@ -1,5 +1,18 @@
-<h1><%= t('.title', official_name: @bus_operator.official_name) %></h1>
-<%= bootstrap_form_with(model: @bus_operator, local: true) do |f| %>
-  <%= f.text_area :description %>
-  <%= f.submit t('.submit'), class: "btn btn-primary" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <h1>
+      <%= t('.title', official_name: @bus_operator.official_name.titleize) %>
+      <small>
+        <%= link_to(@bus_operator) do %>
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" title="<%= t('.show', official_name: @bus_operator.official_name.titleize) %>"></span>
+        <% end %>
+      </small>
+    </h1>
+  </div>
+  <div class="row">
+    <%= bootstrap_form_with(model: @bus_operator, local: true) do |f| %>
+      <%= f.text_area :description %>
+      <%= f.submit t('.submit'), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

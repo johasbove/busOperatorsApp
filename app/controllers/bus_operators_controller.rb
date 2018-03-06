@@ -3,12 +3,13 @@ class BusOperatorsController < ApplicationController
   before_action :set_bus_operator, only: [:show, :edit, :update]
 
   def index
-    @bus_operators = BusOperator.order(params[:order_by])
+    @bus_operators = BusOperator.order(@order_selected)
                                 .page(params[:page])
                                 .per(20)
   end
 
   def show
+    @review = @bus_operator.reviews.build
   end
 
   def edit
@@ -32,6 +33,10 @@ class BusOperatorsController < ApplicationController
   end
 
   def bus_operator_params
-    params.require(:bus_operator).permit(:description)
+    @order_selected = params.require(:bus_operator).permit(:description)
+  end
+
+  def bus_operator_order_params
+    params[:bus_operator].try(:[], 'order_by')
   end
 end

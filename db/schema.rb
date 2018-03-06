@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20180305021854) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "comment"
-    t.integer "rating"
+    t.float "rating"
     t.bigint "bus_operator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
