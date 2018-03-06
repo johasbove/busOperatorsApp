@@ -4,13 +4,14 @@ class BusOperator < ApplicationRecord
   ORDER_ATTR = ['official_name', 'average_rating']
   has_many :reviews
 
+  after_create :create_initial_reviews
+
   def self.update
     response = RestClient.get(BUS_OPERATORS_UPDATE_URL)
     bus_operators = JSON.parse(response.body)['bus_operators']
     operator_ids = bus_operators.each do |operator|
       operator = format_operator operator
       bus_operator = find_or_create operator
-      bus_operator.create_initial_reviews unless bus_operator.average_rating.nil?
     end
   end
 
@@ -18,14 +19,15 @@ class BusOperator < ApplicationRecord
     average_rating.nil? ? 0 : average_rating * 100 / 5
   end
 
+  private
+
   def create_initial_reviews
+    return if average_rating.nil?
     10.times do
       review = self.reviews.build(rating: average_rating)
       review.save
     end
   end
-
-  private
 
   def self.find_or_create operator
     self.create_with(operator)
