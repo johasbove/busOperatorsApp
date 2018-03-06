@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1>
+    <h2>
       <%= t('.title', official_name: @bus_operator.official_name.titleize) %>
       <small>
         <%= link_to(edit_bus_operator_path(@bus_operator)) do %>
@@ -10,7 +10,7 @@
           <span class="glyphicon glyphicon-star" aria-hidden="true" title="<%= t('.reviews') %>"></span>
         <% end %>
       </small>
-    </h1>
+    </h2>
   </div>
   <div class="row">
     <div class="col-md-8">

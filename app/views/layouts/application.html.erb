@@ -13,7 +13,9 @@
     <div class="wrapper">
       <%= render 'layouts/navigation/layout'%>
       <div class="content-wrapper">
-        <%= yield %>
+        <div class="jumbotron">
+          <%= yield %>
+        </div>
       </div>
       <%= render 'layouts/navigation/footer'%>
     </div>

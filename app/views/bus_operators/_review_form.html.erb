@@ -1,4 +1,4 @@
-<%= bootstrap_form_with(model: review, local: true) do |f| %>
+<%= bootstrap_form_with(model: review, url: reviews_url, local: true) do |f| %>
   <%= f.text_area :comment %>
   <fieldset class="rating form-control">
     <input type="radio" id="star5" name="review[rating]" value="5" /><label class = "full" for="star5"></label>
