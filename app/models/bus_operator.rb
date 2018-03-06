@@ -3,7 +3,6 @@ class BusOperator < ApplicationRecord
   MODEL_ATTRS = ['external_id', 'internal_name', 'official_name', 'bookable', 'phone', 'allows_e_ticketing', 'average_rating', 'payload']
   ORDER_ATTR = ['official_name', 'average_rating']
   include Sortable
-  add_sortable_scopes
 
   has_many :reviews
 
