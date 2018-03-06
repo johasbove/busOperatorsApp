@@ -6,6 +6,18 @@ class BusOperator < ApplicationRecord
 
   after_create :create_initial_reviews
 
+  scope :order_by_option, -> (attribute, opt) do
+    case opt
+    when :desc
+      order("#{attribute} DESC")
+    when :null_desc
+      order("#{attribute} DESC NULLS LAST")
+    else
+      order(attribute)
+    end
+
+  end
+
   def self.update
     response = RestClient.get(BUS_OPERATORS_UPDATE_URL)
     bus_operators = JSON.parse(response.body)['bus_operators']
