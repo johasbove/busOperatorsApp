@@ -2,30 +2,33 @@ class BusOperator < ApplicationRecord
   BUS_OPERATORS_UPDATE_URL = 'https://www.recorrido.cl/api/v2/es/bus_operators.json'
   MODEL_ATTRS = ['external_id', 'internal_name', 'official_name', 'bookable', 'phone', 'allows_e_ticketing', 'average_rating', 'payload']
   ORDER_ATTR = ['official_name', 'average_rating']
+  include Sortable
+  add_sortable_scopes
+
   has_many :reviews
 
   after_create :create_initial_reviews
 
-  scope :order_by_option, -> (attribute, opt) do
-    case opt
-    when :desc
-      order("#{attribute} DESC")
-    when :null_desc
-      order("#{attribute} DESC NULLS LAST")
-    else
-      order(attribute)
-    end
-
-  end
-
   def self.update
     response = RestClient.get(BUS_OPERATORS_UPDATE_URL)
     bus_operators = JSON.parse(response.body)['bus_operators']
-    operator_ids = bus_operators.each do |operator|
+    already_created_ids = BusOperator.where(external_id: bus_operators.map{|o| o['id']}).pluck(:external_id)
+    to_be_created = bus_operators.reject {|o| already_created_ids.include?(o['id'].to_i)}
+    to_be_created.each do |operator|
       operator = format_operator operator
-      bus_operator = find_or_create operator
+      find_or_create operator
     end
   end
+
+  # Menos óptimo :(
+  # def self.update
+  #   response = RestClient.get(BUS_OPERATORS_UPDATE_URL)
+  #   bus_operators = JSON.parse(response.body)['bus_operators']
+  #   operator_ids = bus_operators.each do |operator|
+  #     operator = format_operator operator
+  #     find_or_create operator
+  #   end
+  # end
 
   def rating_percentage
     average_rating.nil? ? 0 : average_rating * 100 / 5

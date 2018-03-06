@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_bus_operator
   def index
     @reviews = @bus_operator.reviews
+                            .order_by_option('created_at', :desc)
                             .page(params[:page])
                             .per(20)
   end

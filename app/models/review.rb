@@ -1,4 +1,7 @@
 class Review < ApplicationRecord
+  include Sortable
+  add_sortable_scopes
+  
   belongs_to :bus_operator
 
   after_create :update_average_rating

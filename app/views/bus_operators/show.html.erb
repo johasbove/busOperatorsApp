@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-md-8">
       <label><%= BusOperator.human_attribute_name :average_rating %></label>
-      <p><%= @bus_operator.average_rating %></p>
+      <p><%= number_with_precision(@bus_operator.average_rating, precision: 2) %></p>
       <label><%= BusOperator.human_attribute_name :description %></label>
       <p><%= @bus_operator.description %></p>
 
